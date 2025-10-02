@@ -42,8 +42,3 @@ COPY 		--chown=container:container ./wrapper.js /wrapper/wrapper.js
 RUN			chmod +x /wrapper/wrapper.js
 
 CMD			[ "/bin/bash", "/entrypoint.sh" ]
-COPY 		./entrypoint.sh /entrypoint.sh
-COPY 		--chown=container:container ./wrapper.js /wrapper/wrapper.js
-RUN			chmod +x /wrapper/wrapper.js
-
-CMD			[ "/bin/bash", "/entrypoint.sh" ]
