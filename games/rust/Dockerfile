@@ -15,7 +15,10 @@ RUN			apt install -y \
 				iproute2 \
 				tzdata \
 				libgdiplus \
-				libsdl2-2.0-0:i386
+				libsdl2-2.0-0:i386 \
+				libgl1 \
+				libgl1-mesa-dri \
+				libglu1-mesa
 
 RUN			mkdir /wrapper \
 			&& npm install --prefix /wrapper ws
@@ -34,6 +37,11 @@ ENV         USER=container HOME=/home/container
 
 WORKDIR 	/home/container
 
+COPY 		./entrypoint.sh /entrypoint.sh
+COPY 		--chown=container:container ./wrapper.js /wrapper/wrapper.js
+RUN			chmod +x /wrapper/wrapper.js
+
+CMD			[ "/bin/bash", "/entrypoint.sh" ]
 COPY 		./entrypoint.sh /entrypoint.sh
 COPY 		--chown=container:container ./wrapper.js /wrapper/wrapper.js
 RUN			chmod +x /wrapper/wrapper.js
